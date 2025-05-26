@@ -24,6 +24,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7f84adcb-1a69-4a4c-8724-abbac1cd461d"
+      }
+    },
+    "owner": "fedesan14"
   }
 }
