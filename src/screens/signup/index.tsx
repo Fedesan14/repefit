@@ -7,6 +7,7 @@ import { signupScheme } from "./signup.scheme";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
+import { ApiError } from '../../app/types/responses/ApiError';
 
 const Signup = () => {
 
@@ -28,16 +29,15 @@ const Signup = () => {
                 Toast.show({
                     type: 'success',
                     text1: 'Usuario registrado',
-                    text2: 'Ya pueden ingresar con tu nuevo usuario'
+                    text2: 'Ya puedes ingresar con tu nuevo usuario'
                 })
                 navigation.navigate('Signin')
             })
-            .catch((error) => {
-                console.log('error', error)
+            .catch((error: ApiError) => {
                 Toast.show({
                     type: 'error',
                     text1: 'Error al registrarse',
-                    text2: `${error.error}`
+                    text2: `${error.data.errorMessage}`
                 })
             })
     }

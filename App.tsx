@@ -4,6 +4,7 @@ import Signup from './src/screens/signup';
 import Signin from './src/screens/signin';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store/store';
+import Toast from 'react-native-toast-message';
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <Navigation />
+      <Toast />
     </Provider>
   )
 }
