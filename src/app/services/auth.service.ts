@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { SignupRequest } from "../types/request/SignupRequest";
 
-console.log(`URL IS ${process.env.EXPO_PUBLIC_BACKEND_URL}/auth`)
-
 export const authService = createApi({
     reducerPath: 'auth',
     baseQuery: fetchBaseQuery({ baseUrl: `${process.env.EXPO_PUBLIC_BACKEND_URL}/auth` }),
