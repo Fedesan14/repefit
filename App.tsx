@@ -5,11 +5,13 @@ import Signin from './src/screens/signin';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store/store';
 import Toast from 'react-native-toast-message';
+import Home from './src/screens/home';
 
 const RootStack = createNativeStackNavigator({
   screens: {
     Signin: Signin,
     Signup: Signup,
+    Home: Home
   },
 });
 
