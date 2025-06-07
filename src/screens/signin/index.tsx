@@ -1,4 +1,4 @@
-import { Button, Text, TextInput, View } from "react-native"
+import { Text, View } from "react-native"
 import { SigninStyles } from "./signin.styles";
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from 'react-hook-form';
@@ -9,6 +9,9 @@ import { LoginRequest } from '../../app/types/request/LoginRequest';
 import { ApiError } from '../../app/types/responses/ApiError';
 import Toast from 'react-native-toast-message';
 import { encryptToBase64 } from '../../utils/Base64Utils';
+import Button from '../../components/ui/Button';
+import InputText from '../../components/ui/InputText';
+import { CommonStyles } from '../../theme/styles';
 
 const Signin = () => {
 
@@ -47,51 +50,52 @@ const Signin = () => {
 
     return (
         <View style={SigninStyles.container}>
-            <View>
-                <Text>Usuario</Text>
-                <Controller 
-                    control={control}
-                    rules={{ required: true }}
-                    name="username"
-                    render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
-                            value={value}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            placeholder="MiNombreDeUsuario"
-                        />
-                    }
-                />
-                { errors.username && <Text>{errors.username.message}</Text>}
-            </View>
+            <View style={SigninStyles.formContainer}>
+                <View>
+                    <Text>Usuario</Text>
+                    <Controller 
+                        control={control}
+                        rules={{ required: true }}
+                        name="username"
+                        render={({field: { onChange, onBlur, value}}) =>
+                            <InputText 
+                                value={value}
+                                onChangeText={onChange}
+                                onBlur={onBlur}
+                                placeholder="MiNombreDeUsuario"
+                                errorMessage={errors.username?.message}
+                            />
+                        }
+                    />
+                </View>
 
-            <View>
-                <Text>Contraseña</Text>
-                <Controller 
-                    control={control}
-                    rules={{ required: true }}
-                    name="password"
-                    render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
-                            value={value}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            secureTextEntry
-                            placeholder="***********"
-                        />
-                    }
-                />
-                { errors.username && <Text>{errors.username.message}</Text>}
+                <View>
+                    <Text>Contraseña</Text>
+                    <Controller 
+                        control={control}
+                        rules={{ required: true }}
+                        name="password"
+                        render={({field: { onChange, onBlur, value}}) =>
+                            <InputText 
+                                value={value}
+                                onChangeText={onChange}
+                                onBlur={onBlur}
+                                secureTextEntry
+                                placeholder="***********"
+                                errorMessage={errors.password?.message}
+                            />
+                        }
+                    />
+                </View>
             </View>
-
-            <View>
-                <Button
-                    title="Ingresar"
-                    onPress={handleSubmit(handleSignin)}
-                />
+            <View style={SigninStyles.buttonsContainer}>
                 <Button
                     title="Crear usuario"
                     onPress={handleCreateUser}
+                />
+                <Button
+                    title="Ingresar"
+                    onPress={handleSubmit(handleSignin)}
                 />
             </View>
         </View>

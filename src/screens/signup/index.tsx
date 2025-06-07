@@ -1,4 +1,4 @@
-import { Button, KeyboardAvoidingView, Platform, Text, TextInput, View } from "react-native"
+import { KeyboardAvoidingView, Platform, Text, View } from "react-native"
 import { SignupStyles } from "./signup.styles";
 import { useSignupMutation } from "../../app/services/auth.service";
 import { Controller, useForm } from "react-hook-form";
@@ -8,6 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { ApiError } from '../../app/types/responses/ApiError';
+import Button from '../../components/ui/Button';
+import InputText from '../../components/ui/InputText';
 
 const Signup = () => {
 
@@ -54,16 +56,15 @@ const Signup = () => {
                     rules={{ required: true }}
                     name="username"
                     render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
+                        <InputText 
                             value={value}
                             onChangeText={onChange}
                             onBlur={onBlur}
-                            style={SignupStyles.input}
                             placeholder="MiNombreDeUsuario"
+                            errorMessage={errors.username?.message}
                         />
                     }
                 />
-                { errors.username && <Text style={SignupStyles.errorMessage}>{errors.username.message}</Text>}
             </View>
             <View style={SignupStyles.InputFieldContainer}>
                 <Text>Contraseña</Text>
@@ -72,17 +73,16 @@ const Signup = () => {
                     rules={{ required: true }}
                     name="password"
                     render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
+                        <InputText 
                             value={value}
                             onChangeText={onChange}
                             onBlur={onBlur}
-                            style={SignupStyles.input}
                             secureTextEntry
                             placeholder="***********"
+                            errorMessage={errors.password?.message}
                         />
                     }
                 />
-                { errors.password && <Text style={SignupStyles.errorMessage}>{errors.password.message}</Text>}
             </View>
             <View style={SignupStyles.InputFieldContainer}>
                 <Text>Repetir contraseña</Text>
@@ -91,17 +91,16 @@ const Signup = () => {
                     rules={{ required: true }}
                     name="repeatedPassword"
                     render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
+                        <InputText 
                             value={value}
                             onChangeText={onChange}
                             onBlur={onBlur}
-                            style={SignupStyles.input}
                             secureTextEntry
                             placeholder="***********"
+                            errorMessage={errors.repeatedPassword?.message}
                         />
                     }
                 />
-                { errors.repeatedPassword && <Text style={SignupStyles.errorMessage}>{errors.repeatedPassword.message}</Text>}
             </View>
             <Button 
                 title="Registrarme"
