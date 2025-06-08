@@ -1,5 +1,3 @@
-import { Button, KeyboardAvoidingView, Platform, Text, TextInput, View } from "react-native"
-import { SignupStyles } from "./signup.styles";
 import { useSignupMutation } from "../../app/services/auth.service";
 import { Controller, useForm } from "react-hook-form";
 import { SignupRequest } from "../../app/types/request/SignupRequest";
@@ -8,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { ApiError } from '../../app/types/responses/ApiError';
+import Button from '../../components/ui/Button';
+import InputText from '../../components/ui/InputText';
+import CenteredContainer from '../../components/ui/CenteredContainer';
 
 const Signup = () => {
 
@@ -43,71 +44,59 @@ const Signup = () => {
     }
 
     return (
-        <KeyboardAvoidingView 
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={SignupStyles.container}
-        >
-            <View style={SignupStyles.InputFieldContainer}>
-                <Text>Usuario</Text>
-                <Controller 
-                    control={control}
-                    rules={{ required: true }}
-                    name="username"
-                    render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
-                            value={value}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            style={SignupStyles.input}
-                            placeholder="MiNombreDeUsuario"
-                        />
-                    }
-                />
-                { errors.username && <Text style={SignupStyles.errorMessage}>{errors.username.message}</Text>}
-            </View>
-            <View style={SignupStyles.InputFieldContainer}>
-                <Text>Contraseña</Text>
-                <Controller 
-                    control={control}
-                    rules={{ required: true }}
-                    name="password"
-                    render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
-                            value={value}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            style={SignupStyles.input}
-                            secureTextEntry
-                            placeholder="***********"
-                        />
-                    }
-                />
-                { errors.password && <Text style={SignupStyles.errorMessage}>{errors.password.message}</Text>}
-            </View>
-            <View style={SignupStyles.InputFieldContainer}>
-                <Text>Repetir contraseña</Text>
-                <Controller 
-                    control={control}
-                    rules={{ required: true }}
-                    name="repeatedPassword"
-                    render={({field: { onChange, onBlur, value}}) =>
-                        <TextInput 
-                            value={value}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            style={SignupStyles.input}
-                            secureTextEntry
-                            placeholder="***********"
-                        />
-                    }
-                />
-                { errors.repeatedPassword && <Text style={SignupStyles.errorMessage}>{errors.repeatedPassword.message}</Text>}
-            </View>
+        <CenteredContainer>
+            <Controller 
+                control={control}
+                rules={{ required: true }}
+                name="username"
+                render={({field: { onChange, onBlur, value}}) =>
+                    <InputText 
+                        value={value}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                        placeholder="MiNombreDeUsuario"
+                        errorMessage={errors.username?.message}
+                        label='Usuario'
+                    />
+                }
+            />
+            <Controller 
+                control={control}
+                rules={{ required: true }}
+                name="password"
+                render={({field: { onChange, onBlur, value}}) =>
+                    <InputText 
+                        value={value}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                        secureTextEntry
+                        placeholder="***********"
+                        errorMessage={errors.password?.message}
+                        label='Contraseña'
+                    />
+                }
+            />
+            <Controller 
+                control={control}
+                rules={{ required: true }}
+                name="repeatedPassword"
+                render={({field: { onChange, onBlur, value}}) =>
+                    <InputText 
+                        value={value}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                        secureTextEntry
+                        placeholder="***********"
+                        errorMessage={errors.repeatedPassword?.message}
+                        label='Repetir contraseña'
+                    />
+                }
+            />
             <Button 
                 title="Registrarme"
                 onPress={handleSubmit(onSubmit)}
             />
-        </KeyboardAvoidingView>
+        </CenteredContainer>
     )
 }
 

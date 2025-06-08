@@ -5,20 +5,8 @@ export const SignupStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        maxWidth: 500,
     },
-
-    input: {
-        height: 40,
-        borderWidth: 1,
-        padding: 10,
-    },
-
     InputFieldContainer: {
-        width: '80%',
-        marginBottom: 10
     },
-
-    errorMessage: {
-        color: 'red'
-    }
 });
