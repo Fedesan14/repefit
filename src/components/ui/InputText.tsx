@@ -1,4 +1,3 @@
-// components/ui/InputText.tsx
 import React from 'react';
 import {
   TextInput,
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 import colors from '../../theme/colors';
 import spacing from '../../theme/spacing';
+import fonts from '../../theme/fonts';
 
 interface Props extends TextInputProps {
   label?: string;
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   label: {
     marginBottom: spacing.xs,
     color: colors.text,
-    fontSize: 14,
+    fontSize: fonts.sm,
     fontWeight: '500',
   },
   input: {

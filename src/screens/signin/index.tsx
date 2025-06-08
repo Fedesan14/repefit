@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import { SigninStyles } from "./signin.styles";
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from 'react-hook-form';
@@ -11,7 +11,7 @@ import Toast from 'react-native-toast-message';
 import { encryptToBase64 } from '../../utils/Base64Utils';
 import Button from '../../components/ui/Button';
 import InputText from '../../components/ui/InputText';
-import { CommonStyles } from '../../theme/styles';
+import CenteredContainer from '../../components/ui/CenteredContainer';
 
 const Signin = () => {
 
@@ -49,56 +49,53 @@ const Signin = () => {
     }
 
     return (
-        <View style={SigninStyles.container}>
+        <CenteredContainer>
             <View style={SigninStyles.formContainer}>
-                <View>
-                    <Text>Usuario</Text>
-                    <Controller 
-                        control={control}
-                        rules={{ required: true }}
-                        name="username"
-                        render={({field: { onChange, onBlur, value}}) =>
-                            <InputText 
-                                value={value}
-                                onChangeText={onChange}
-                                onBlur={onBlur}
-                                placeholder="MiNombreDeUsuario"
-                                errorMessage={errors.username?.message}
-                            />
-                        }
-                    />
-                </View>
-
-                <View>
-                    <Text>Contraseña</Text>
-                    <Controller 
-                        control={control}
-                        rules={{ required: true }}
-                        name="password"
-                        render={({field: { onChange, onBlur, value}}) =>
-                            <InputText 
-                                value={value}
-                                onChangeText={onChange}
-                                onBlur={onBlur}
-                                secureTextEntry
-                                placeholder="***********"
-                                errorMessage={errors.password?.message}
-                            />
-                        }
-                    />
-                </View>
+                <Controller 
+                    control={control}
+                    rules={{ required: true }}
+                    name="username"
+                    render={({field: { onChange, onBlur, value}}) =>
+                        <InputText 
+                            value={value}
+                            onChangeText={onChange}
+                            onBlur={onBlur}
+                            placeholder="MiNombreDeUsuario"
+                            errorMessage={errors.username?.message}
+                            label='Usuario'
+                        />
+                    }
+                />
+                <Controller 
+                    control={control}
+                    rules={{ required: true }}
+                    name="password"
+                    render={({field: { onChange, onBlur, value}}) =>
+                        <InputText 
+                            value={value}
+                            onChangeText={onChange}
+                            onBlur={onBlur}
+                            secureTextEntry
+                            placeholder="***********"
+                            label='Contraseña'
+                            errorMessage={errors.password?.message}
+                        />
+                    }
+                />
             </View>
             <View style={SigninStyles.buttonsContainer}>
                 <Button
                     title="Crear usuario"
                     onPress={handleCreateUser}
-                />
+                    style={{width: '45%'}}
+                    />
                 <Button
                     title="Ingresar"
                     onPress={handleSubmit(handleSignin)}
+                    style={{width: '45%'}}
                 />
             </View>
-        </View>
+        </CenteredContainer>
     )
 }
 
